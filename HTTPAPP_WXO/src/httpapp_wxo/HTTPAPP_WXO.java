@@ -17,7 +17,7 @@ public class HTTPAPP_WXO {
     public static void main(String[] args) {
         // TODO code application logic here
         //Please run the WebServer Class first, then run the HTTPClient Class separately
-        WebServer theServer = new WebServer();
+       // WebServer theServer = new WebServer();
     }
     
 }

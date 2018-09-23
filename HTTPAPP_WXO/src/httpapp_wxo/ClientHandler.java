@@ -1,14 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package httpapp_wxo;
 
-/**
- *
- * @author Zifeng Xia
- */
+
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -42,7 +34,7 @@ public class ClientHandler implements Runnable {
                 System.out.println("Get method processed");
                 String httpQueryString = tokenizer.nextToken();
                 StringBuilder responseBuffer = new StringBuilder();
-                responseBuffer
+               responseBuffer
                         .append("<html><h1>The IST411 WXO Home Page.... </h1><br>")
                         .append("<b>Welcome to WXO web server!</b><BR>")
                         .append("<h1>Your current diary: </h1>")
@@ -55,7 +47,21 @@ public class ClientHandler implements Runnable {
                         "</form>")
 
                         .append("</html>");
+                
                 sendResponse(socket, 200, responseBuffer.toString());
+                
+                
+            } else if (httpMethod.equals("POST")) {
+                System.out.println("POST method processed");
+                String httpQueryString = tokenizer.nextToken();
+                StringBuilder responseBuffer = new StringBuilder();
+                responseBuffer
+                        .append("<html><h1>WebServer Home Page.... </h1><br>")
+                        .append("<b>Welcome to my web server! </b><BR>")
+                        .append("</html>");
+                
+                sendResponse(socket, 200, responseBuffer.toString());
+   
             } else {
                 System.out.println("The HTTP method is not recognized");
                 sendResponse(socket, 405, "Method Not Allowed");
@@ -74,7 +80,7 @@ public class ClientHandler implements Runnable {
             if (statusCode == 200) {
                 statusLine = "HTTP/1.0 200 OK" + "\r\n";
                 String contentLengthHeader = "Content-Length: " + responseString.length() + "\r\n";
-
+  
                 out.writeBytes(statusLine);
                 out.writeBytes(serverHeader);
                 out.writeBytes(contentTypeHeader);
@@ -99,3 +105,4 @@ public class ClientHandler implements Runnable {
 }
 
 
+  
